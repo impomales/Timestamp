@@ -1,0 +1,26 @@
+body {
+    background-color: #ddd;
+    padding-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.white_box {
+    background-color: white;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 0px 1px 5px black;
+    
+}
+
+.white_box p {
+    margin-left: 25px;
+    color: red;
+}
+
+li {
+    margin: 10px;
+}
+
