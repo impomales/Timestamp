@@ -1,6 +1,7 @@
 var express = require('express')
 var path = require('path')
 var app = express()
+var moment = require('moment')
 
 app.use(express.static(path.join(__dirname + '/html')))
 
@@ -9,7 +10,18 @@ app.get('/', function(req, res) {
 })
 
 app.get('/:date', function(req, res) {
-    res.end(req.params.date);
+    var date = req.params.date;
+    
+    if (!isNaN(date))
+        res.end(moment(date).valueOf().toString())
+    else {
+        var natural = moment(date, 'MMMM-DD-YYYY').format()
+        
+        if (natural === 'Invalid date')
+            res.end('error!')
+        else
+            res.end(natural)
+    }
 })
 
 app.listen(8080, function() {
