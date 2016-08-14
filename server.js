@@ -8,6 +8,10 @@ app.get('/', function(req, res) {
     res.render('index.html')
 })
 
+app.get('/:date', function(req, res) {
+    res.end(req.params.date);
+})
+
 app.listen(8080, function() {
     console.log('the app is listening at port 8080!')
 })
