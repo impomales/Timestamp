@@ -12,15 +12,25 @@ app.get('/', function(req, res) {
 app.get('/:date', function(req, res) {
     var date = req.params.date;
     
-    if (!isNaN(date))
-        res.end(moment(date).valueOf().toString())
+    if (!isNaN(parseInt(date))) {
+        res.json({
+            unix: moment.unix(parseInt(date)).unix(),
+            natural: moment.unix(parseInt(date)).format('MMMM-DD-YYYY')
+        })
+    }
     else {
         var natural = moment(date, 'MMMM-DD-YYYY').format()
         
-        if (natural === 'Invalid date')
-            res.end('error!')
-        else
-            res.end(natural)
+        if (natural === 'Invalid date') {
+            res.writeHead(406) 
+            res.end('invalid date')
+        }
+        else {
+            res.json({
+                unix: moment(date, 'MMMM-DD-YYYY').unix(),
+                natural: moment(date, 'MMMM-DD-YYYY').format('MMMM-DD-YYYY')
+            })
+        }
     }
 })
 
